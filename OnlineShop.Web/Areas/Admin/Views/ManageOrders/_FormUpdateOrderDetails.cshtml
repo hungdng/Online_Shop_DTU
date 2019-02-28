@@ -1,0 +1,32 @@
+﻿<div id="modalAddUpdate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmSaveData">
+                    <div class="form-group">
+                        <label for="txtSaleNumber">Sale Number:</label>
+                        <input type="number" class="form-control" name="txtSaleNumber" id="txtSaleNumber" />
+                        <input type="hidden" id="hidID"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSalePrice">Sale Price:</label>
+                        <input type="number" class="form-control" readonly name="txtSalePrice" id="txtSalePrice" />
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="txtProductSpec">Product Spec:</label>
+                        <input type="text" class="form-control" name="txtProductSpec" id="txtProductSpec" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btnSave">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

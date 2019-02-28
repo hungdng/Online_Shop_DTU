@@ -1,0 +1,82 @@
+﻿@model OnlineShop.Web.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var selectList = new SelectList(
+   new List<SelectListItem>
+   {
+            new SelectListItem {Text = "Male", Value = "Male"},
+            new SelectListItem {Text = "Female", Value = "Female"},
+   }, "Value", "Text");
+}
+   <!-- BREADCRUMBS SETCTION START -->
+<div class="breadcrumbs-section plr-200 mb-80">
+    <div class="breadcrumbs overlay-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumbs-inner">
+                        <h1 class="breadcrumbs-title">Login / Register</h1>
+                        <ul class="breadcrumb-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li>Login / Register</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMBS SETCTION END -->
+<!-- Start page content -->
+<div id="page-content" class="page-wrapper">
+    <!-- LOGIN SECTION START -->
+    <div class="login-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="new-customers">
+
+
+                        <h6 class="widget-title border-left mb-50">NEW CUSTOMERS</h6>
+                        <div class="login-account p-30 box-shadow">
+                            @using (Html.BeginForm("Register", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email..." })
+
+                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
+
+                                @Html.TextBoxFor(m => m.Fullname, new { @placeholder = "Fullname..." })
+
+                                @Html.DropDownListFor(m => m.Gender, selectList, new { @class = "custom-select" })
+
+                                @Html.TextBoxFor(m => m.Address, new { @placeholder = "Address..." })
+
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Phone number..." })
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="submit-btn-1 mt-20 btn-hover-1" type="submit" value="register">Register</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="submit-btn-1 mt-20 btn-hover-1 f-right" type="reset">Clear</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- LOGIN SECTION END -->
+</div>
+<!-- End page content -->

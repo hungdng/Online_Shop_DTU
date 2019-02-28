@@ -1,0 +1,268 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMBS SETCTION START -->
+<div class="breadcrumbs-section plr-200 mb-80">
+    <div class="breadcrumbs overlay-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumbs-inner">
+                        <h1 class="breadcrumbs-title">Shopping Cart</h1>
+                        <ul class="breadcrumb-list">
+                            <li><a href="/">Home</a></li>
+                            <li>Cart</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMBS SETCTION END -->
+<!-- Start page content -->
+<section id="page-content" class="page-wrapper">
+    <!-- SHOP SECTION START -->
+    <div class="shop-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-12">
+                    <ul class="cart-tab">
+                        <li>
+                            <a class="active" href="">
+                                <span>01</span>
+                                Cart
+                            </a>
+                        </li>
+
+                        <li id="tab-checkout">
+                            <a href="">
+                                <span>02</span>
+                                Check
+                            </a>
+                        </li>
+                        <li id="tab-complete">
+                            <a href="">
+                                <span>03</span>
+                                Compeleted
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <style>
+                    input[type=number]::-webkit-inner-spin-button,
+                    input[type=number]::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        margin: 0;
+                    }
+                </style>
+                <div class="col-md-10 col-sm-12">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- shopping-cart start -->
+                        <div class="tab-pane active" id="shopping-cart">
+                            <div class="shopping-cart-content">
+                                <form action="#">
+                                    <div class="table-content table-responsive mb-50">
+                                        <table class="text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-thumbnail">Product</th>
+                                                    <th class="product-price">Price</th>
+                                                    <th class="product-quantity">Quantity</th>
+                                                    <th class="product-subtotal">Cost</th>
+                                                    <th class="product-remove">Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="shoppingCart"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="coupon-discount box-shadow p-30 mb-50">
+                                                <h6 class="widget-title border-left mb-20">Discount Code</h6>
+                                                <p>Enter Discount Code!</p>
+                                                <input type="text" name="name" placeholder="Please enter your discount code here...">
+                                                <button class="submit-btn-1 black-bg btn-hover-2" type="submit">Confirm</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-details box-shadow p-30 mb-50">
+                                                <h6 class="widget-title border-left mb-20">Payment Details</h6>
+                                                <table>
+                                                    <tr>
+                                                        <td class="td-title-1">Amount</td>
+                                                        <td class="td-title-2" id="lblSubTotalOrder">0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title-1">Shipping and Handing</td>
+                                                        <td class="td-title-2">0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title-1">VAT</td>
+                                                        <td class="td-title-2">0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="order-total">Total Cost</td>
+                                                        <td class="order-total-price" id="lblTotalOrder">0</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="culculate-shipping box-shadow p-30">                                               
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <button class="submit-btn-1 black-bg btn-hover-2" id="btnContinue">Back To Buy</button>
+                                                    </div>
+                                                    <div class="col-md-4" id="div-delete-all">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-4" id="div-checkout">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                </form>
+                            </div>
+                        </div>
+                        <!-- shopping-cart end -->
+                        <!-- checkout start -->
+                        <div class="tab-pane" id="checkout">
+                            <div class="checkout-content box-shadow p-30">
+                                <form method="post" id="frmPayment">
+                                    <div class="row">
+                                        <!-- billing details -->
+                                        <div class="col-md-6">
+                                            <div class="billing-details pr-10">
+                                                <h6 class="widget-title border-left mb-20">Bill Details</h6>
+                                                @if (Request.IsAuthenticated)
+                                                {
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" id="checkUserLoginInfo"> Use your account information</label>
+                                                </div>
+
+                                                }
+                                                <input type="text" id="txtFullName" name="name" placeholder="Fullname...">
+                                                <input type="text" id="txtEmail" name="email" placeholder="Email...">
+                                                <input type="text" id="txtPhoneNumber" name="phone" placeholder="Phone Number...">
+                                                <textarea class="custom-textarea" id="txtAddess" name="address" placeholder="Address..."></textarea>
+                                                <textarea class="custom-textarea" id="txtNote" placeholder="Note..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- our order -->
+                                            <div class="payment-details pl-10 mb-50">
+                                                <h6 class="widget-title border-left mb-20">Order</h6>
+                                                <table id="table-detail-checkout"></table>
+                                            </div>
+                                            <!-- payment-method -->
+                                            <div class="payment-method">
+                                                <h6 class="widget-title border-left mb-20">Payment Method</h6>
+                                                <div id="accordion">
+                                                    <div class="panel">
+                                                        <h4 class="payment-title box-shadow">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#bank-transfer">
+                                                                Direct Bank Transfer
+                                                            </a>
+                                                        </h4>
+                                                        <div id="bank-transfer" class="panel-collapse collapse in">
+                                                            <div class="payment-content">
+                                                                <p>Lorem Ipsum is simply in dummy text of the printing and type setting industry. Lorem Ipsum has been.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel">
+                                                        <h4 class="payment-title box-shadow">
+                                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                                cheque payment
+                                                            </a>
+                                                        </h4>
+                                                        <div id="collapseTwo" class="panel-collapse collapse">
+                                                            <div class="payment-content">
+                                                                <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel">
+                                                        <h4 class="payment-title box-shadow">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                                paypal
+                                                            </a>
+                                                        </h4>
+                                                        <div id="collapseThree" class="panel-collapse collapse">
+                                                            <div class="payment-content">
+                                                                <p>Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
+                                                                <ul class="payent-type mt-10">
+                                                                    <li><a href="#"><img src="~/Assets/Client/img/payment/1.png" alt=""></a></li>
+                                                                    <li><a href="#"><img src="~/Assets/Client/img/payment/2.png" alt=""></a></li>
+                                                                    <li><a href="#"><img src="~/Assets/Client/img/payment/3.png" alt=""></a></li>
+                                                                    <li><a href="#"><img src="~/Assets/Client/img/payment/4.png" alt=""></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- payment-method end -->
+                                            <button class="submit-btn-1 mt-30 btn-hover-1" id="btnCreateOrder" data-toggle="tab">place order</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- checkout end -->
+                        <!-- order-complete start -->
+                        <div class="tab-pane" id="order-complete">
+                            <div class="order-complete-content box-shadow">
+                                <div class="thank-you p-30 text-center">
+                                    <h6 class="text-black-5 mb-0">Thank you for ordering. We will contact you as soon as possible</h6>
+                                </div>
+                                <div class="order-info p-30 mb-10">
+                                    <ul class="order-info-list" id="order-code">
+                                        
+                                    </ul>
+                                </div>
+                                <div class="row">
+                                    <!-- our order -->
+                                    <div class="col-md-6">
+                                        <div class="payment-details p-30">
+                                            <h6 class="widget-title border-left mb-20">Order Details</h6>
+                                            <table id="tableOrderComplete">
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="bill-details p-30">
+                                            <h6 class="widget-title border-left mb-20">Order Information</h6>
+                                            <ul class="bill-address" id="info-order-complete">
+                                                
+                                            </ul>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- order-complete end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SHOP SECTION END -->
+</section>
+<!-- End page content -->
+@section ClientJS{
+
+}

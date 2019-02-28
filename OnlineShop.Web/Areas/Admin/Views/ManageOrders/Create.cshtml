@@ -1,0 +1,127 @@
+﻿@model OnlineShop.Web.Models.Order_OrderDetailViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var orderstatuses = (SelectList)ViewBag.OrderStatuses;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Orders</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <div class="clearfix"></div>
+
+                                @Html.HiddenFor(model => model.Orders.CustomerId, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.CustomerName, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.CustomerName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.CustomerMobile, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.CustomerMobile, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.CustomerMobile, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.CustomerEmail, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.CustomerEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.CustomerEmail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.CustomerAddress, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.CustomerAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.CustomerAddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.OrderStatusID, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.DropDownListFor(model => model.Orders.OrderStatusID, new SelectList(orderstatuses, "Value", "Text"), "Choose Order Status", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Orders.OrderStatusID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.Discount, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.Discount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.Amount, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.Amount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.Amount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.TotalCost, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.EditorFor(model => model.Orders.TotalCost, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.Orders.TotalCost, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.PaymentMethod, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.DropDownListFor(model => model.Orders.PaymentMethod, new List<SelectListItem>
+                                    {
+                                    new SelectListItem {Text = "Pay By Cash", Value = "Pay By Cash"},
+                                    new SelectListItem {Text = "Pay By Bank Card", Value = "Pay By Bank Card"}
+                                    }, "--- Select ---", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Orders.PaymentMethod, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orders.Note, htmlAttributes: new { @class = "control-label col-4" })
+                                    <div class="col-10">
+                                        @Html.TextAreaFor(model => model.Orders.Note, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Orders.Note, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-10">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                        @Html.ActionLink("Cancel", "Index", new { controller = "ManageOrders" }, new { @class = "btn btn-default custom" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div><!-- /.row -->

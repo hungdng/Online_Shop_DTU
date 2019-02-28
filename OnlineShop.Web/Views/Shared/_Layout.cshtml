@@ -1,0 +1,79 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Subas || Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Assets/Client/img/icon/favicon.png">
+    <!-- All CSS Files -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css">
+    <link href="~/Assets/Lib/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <!-- Nivo-slider css -->
+    <link rel="stylesheet" href="~/Assets/Client/lib/css/nivo-slider.css">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="~/Assets/Client/css/core.css">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="~/Assets/Client/css/shortcode/shortcodes.css">
+    <!-- Alert style -->
+    <link href="~/Assets/Client/lib/css/sweetalert.css" rel="stylesheet" />
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="~/Assets/Client/css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="~/Assets/Client/css/responsive.css">
+    <!-- User style -->
+    <link rel="stylesheet" href="~/Assets/Client/css/custom.css">
+
+    <!-- Style customizer (Remove these two lines please) -->
+    <link rel="stylesheet" href="~/Assets/Client/css/style-customizer.css">
+
+    <!-- Modernizr JS -->
+    <script src="~/Assets/Client/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="../../../../browsehappy.com/default.htm">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Body main wrapper start -->
+    <div class="wrapper">
+
+        <!-- START HEADER AREA -->
+        @{ Html.RenderAction("Header", "Home");}
+        <!-- END HEADER AREA -->
+
+        @RenderBody()
+
+        <!-- End page content -->
+        <!-- START FOOTER AREA -->
+        @{ Html.RenderAction("Footer", "Home");}
+        <!-- END FOOTER AREA -->
+       
+        @RenderPage("_QuickViewProduct.cshtml")
+
+    </div>
+    <!-- Body main wrapper end -->
+    <!-- Placed JS at the end of the document so the pages load faster -->
+    <!-- jquery latest version -->
+    <script src="~/Assets/Client/js/vendor/jquery-3.1.1.min.js"></script>
+    <script src="~/Assets/Lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <!-- Bootstrap framework js -->
+    <script src="~/Assets/Client/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Assets/Lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <!-- jquery.nivo.slider js -->
+    <script src="~/Assets/Client/lib/js/jquery.nivo.slider.js"></script>
+    <script src="~/Assets/Client/lib/js/sweetalert.min.js"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="~/Assets/Client/js/plugins.js"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="~/Assets/Client/js/main.js"></script>
+    <script src="~/Assets/Client/js/Controller/common.js"></script>
+    <script src="~/Assets/Client/js/Controller/shoppingCart.js"></script>
+    <script src="~/Assets/Client/js/Controller/common.js"></script>
+
+    @RenderSection("ClientJS", required: false)
+</body>
+</html>

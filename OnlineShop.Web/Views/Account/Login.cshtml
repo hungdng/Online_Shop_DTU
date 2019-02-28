@@ -1,0 +1,62 @@
+﻿@model OnlineShop.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <!-- BREADCRUMBS SETCTION START -->
+<div class="breadcrumbs-section plr-200 mb-80">
+    <div class="breadcrumbs overlay-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumbs-inner">
+                        <h1 class="breadcrumbs-title">Login / Register</h1>
+                        <ul class="breadcrumb-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li>Login / Register</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMBS SETCTION END -->
+<!-- Start page content -->
+<div id="page-content" class="page-wrapper">
+    <!-- LOGIN SECTION START -->
+    <div class="login-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="registered-customers">
+                        <h6 class="widget-title border-left mb-50">REGISTERED CUSTOMERS</h6>
+                        @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(false, "", new { @class = "error" })
+                            <div class="login-account p-30 box-shadow">
+                                <p>If you have an account with us, Please log in.</p>
+                                @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email" })
+                                @Html.PasswordFor(model => model.Password, new { @placeholder = "Password" })
+
+                                <p>
+                                    <small>
+                                        @Html.CheckBoxFor(model => model.RememberMe)
+                                        Nhớ mật khẩu?
+                                    </small>
+                                </p>
+                                <p><small><a href="#">Forgot our password?</a></small></p>
+                                <a href="dang-ky.html" class="submit-btn-1 btn-hover-1" type="submit">Register</a>
+                                <button class="submit-btn-1 btn-hover-1" type="submit">Login</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+    <!-- LOGIN SECTION END -->
+</div>
+<!-- End page content -->

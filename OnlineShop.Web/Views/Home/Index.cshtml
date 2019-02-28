@@ -1,0 +1,499 @@
+﻿@model OnlineShop.Web.Models.HomeViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- START SLIDER AREA -->
+<div class="slider-area  plr-185  mb-80">
+    <div class="container-fluid">
+        <div class="slider-content">
+            <div class="row">
+                <div class="active-slider-1 slick-arrow-1 slick-dots-1">
+                    <!-- layer-1 Start -->
+                    <div class="col-md-12">
+                        <div class="layer-1">
+                            <div class="slider-img">
+                                <img src="~/Assets/Client/img/slider/slider-1/1.jpg" alt="">
+                            </div>
+                            <div class="slider-info gray-bg">
+                                <div class="slider-info-inner">
+                                    <h1 class="slider-title-1 text-uppercase text-black-1">WaterProof smartphone</h1>
+                                    <div class="slider-brief text-black-2">
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum,</p>
+                                    </div>
+                                    <a href="#" class="button extra-small button-black">
+                                        <span class="text-uppercase">Buy now</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- layer-1 end -->
+                    <!-- layer-1 Start -->
+                    <div class="col-md-12">
+                        <div class="layer-1">
+                            <div class="slider-img">
+                                <img src="~/Assets/Client/img/slider/slider-1/2.jpg" alt="">
+                            </div>
+                            <div class="slider-info gray-bg">
+                                <div class="slider-info-inner">
+                                    <h1 class="slider-title-1 text-uppercase text-black-1">WaterProof smartphone</h1>
+                                    <div class="slider-brief text-black-2">
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum,</p>
+                                    </div>
+                                    <a href="#" class="button extra-small button-black">
+                                        <span class="text-uppercase">Buy now</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- layer-1 end -->
+                    <!-- layer-1 Start -->
+                    <div class="col-md-12">
+                        <div class="layer-1">
+                            <div class="slider-img">
+                                <img src="~/Assets/Client/img/slider/slider-1/1.jpg" alt="">
+                            </div>
+                            <div class="slider-info gray-bg">
+                                <div class="slider-info-inner">
+                                    <h1 class="slider-title-1 text-uppercase text-black-1">WaterProof smartphone</h1>
+                                    <div class="slider-brief text-black-2">
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum,</p>
+                                    </div>
+                                    <a href="#" class="button extra-small button-black">
+                                        <span class="text-uppercase">Buy now</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- layer-1 end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SLIDER AREA -->
+<!-- Start page content -->
+<section id="page-content" class="page-wrapper">
+
+    <!-- HOT PRODUCT SECTION START -->
+    <div class="featured-product-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">Hot products</h2>
+                        <h6>Hot products</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-product">
+                <div class="row active-featured-product slick-arrow-2">
+                    <!-- product-item start -->
+                    @foreach (var item in Model.HotProduct)
+                    {
+                    var url = "/" + item.Alias + ".p-" + item.ProductID + ".html";
+                    <div class="col-xs-12">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <a href="@url">
+                                    <img src="@item.ThumbnailImage" alt="@item.ProductName" />
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h6 class="product-title">
+                                    <a href="@url">@item.ProductName</a>
+                                </h6>
+                                <div class="pro-rating">
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                </div>
+                                @if (item.PromotionPrice > 0)
+                                {
+                                <h3 style="margin-bottom:5px;" class="pro-price">@item.PromotionPrice.Value.ToString("N0")</h3>
+                                <h4 style=" text-decoration: line-through; margin-bottom: 10px;" class="pro-price">@item.Price.ToString("N0")</h4>
+                                }
+                                else
+                                {
+                                if (item.Price > 0)
+                                {
+                                <h3 style="margin-bottom:5px;" class="pro-price">@item.Price.ToString("N0")</h3>
+                                }
+                                else
+                                {
+                                <h3 style="margin-bottom:5px;" class="pro-price">Contact Us</h3>
+                                }
+                                <h4 style="margin-bottom: 10px;" class="pro-price">&nbsp;</h4>
+                                }
+
+
+                                <ul class="action-button">
+                                    <li>
+                                        <a href="#" title="Favorite"><i class="zmdi zmdi-favorite"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="" data-id="@item.ProductID" title="Quick View" class="btn-quickView"><i class="zmdi zmdi-zoom-in"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                    </li>
+                                    <li>
+                                        @if (item.Price > 0)
+                                        {
+                                        <a href="" class="btn-AddToCart" data-id="@item.ProductID" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        }
+                                        else
+                                        {
+                                        <a href="" class="btn-contact" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- product-item end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HOT PRODUCT SECTION END -->
+    <!-- NEW PRODUCT SECTION START -->
+    <div class="featured-product-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">New Products</h2>
+                        <h6>List New Products</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-product">
+                <div class="row active-featured-product slick-arrow-2">
+                    <!-- product-item start -->
+                    @foreach (var item in Model.LastestProduct)
+                    {
+                    var url = "/" + item.Alias + ".p-" + item.ProductID + ".html";
+                    <div class="col-xs-12">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <a href="@url">
+                                    <img src="@item.ThumbnailImage" alt="@item.ProductName" />
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h6 class="product-title">
+                                    <a href="@url">@item.ProductName</a>
+                                </h6>
+                                <div class="pro-rating">
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                </div>
+                                @if (item.Price > 0)
+                                {
+                                <h3 class="pro-price">@item.Price.ToString("N0")</h3>
+                                }
+                                else
+                                {
+                                <h3 class="pro-price">Contact</h3>
+                                }
+
+                                <ul class="action-button">
+                                    <li>
+                                        <a href="#" title="Favorite"><i class="zmdi zmdi-favorite"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="" data-id="@item.ProductID" title="Quick View" class="btn-quickView"><i class="zmdi zmdi-zoom-in"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                    </li>
+                                    <li>
+                                        @if (item.Price > 0)
+                                        {
+                                        <a href="" class="btn-AddToCart" data-id="@item.ProductID" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        }
+                                        else
+                                        {
+                                        <a href="" class="btn-contact" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- product-item end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- NEW PRODUCT SECTION END -->
+    <!-- PROMOTIONS PRODUCT SECTION START -->
+    <div class="featured-product-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">Sale-off Products</h2>
+                        <h6>List Sale-off Products</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-product">
+                <div class="row active-featured-product slick-arrow-2">
+                    <!-- product-item start -->
+                    @foreach (var item in Model.PromotionProduct)
+                    {
+                    var url = "/" + item.Alias + ".p-" + item.ProductID + ".html";
+                    <div class="col-xs-12">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <a href="@url">
+                                    <img src="@item.ThumbnailImage" alt="@item.ProductName" />
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h6 class="product-title">
+                                    <a href="@url">@item.ProductName</a>
+                                </h6>
+                                <div class="pro-rating">
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                </div>
+                                <h3 style="margin-bottom:5px;" class="pro-price">@item.PromotionPrice.Value.ToString("N0")</h3>
+                                <h4 style="text-decoration: line-through; margin-bottom: 10px;" class="pro-price">@item.Price.ToString("N0")</h4>
+                                <ul class="action-button">
+                                    <li>
+                                        <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="" data-id="@item.ProductID" title="Quick View" class="btn-quickView"><i class="zmdi zmdi-zoom-in"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                    </li>
+                                    <li>
+                                        @if (item.Price > 0)
+                                        {
+                                        <a href="" class="btn-AddToCart" data-id="@item.ProductID" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        }
+                                        else
+                                        {
+                                        <a href="" class="btn-contact" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <!-- product-item end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PROMOTIONS PRODUCT SECTION END -->
+    <!-- PRODUCT TAB SECTION START -->
+    @foreach (var category in Model.ManufacturetInTab)
+    {
+    <div class="product-tab-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="section-title text-left mb-40">
+                        @if (@category.CategoryName == "Điện thoại")
+                        {
+                        <h2 class="uppercase">Mobile</h2>
+                        <h6>List Mobile</h6>
+                        }
+                        else
+                        {
+                        <h2 class="uppercase">@category.CategoryName</h2>
+                        <h6>List @category.CategoryName</h6>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="pro-tab-menu text-right product-by-manufacture">
+                        <!-- Nav tabs -->
+                        <ul class="" data-cateId="@category.Id">
+                            @foreach (var item in category.ListManufacture)
+                            {
+                            <li><a class="item-manufacture" href="#@item.ManufactureID" data-id="@item.ManufactureID" data-toggle="tab">@item.ManufactureName </a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product-tab">
+                <!-- Tab panes -->
+                <div class="tab-content" id="@category.Id">
+                    <!-- popular-product start -->
+                    @foreach (var item in category.ListManufacture)
+                    {
+                    <div class="tab-pane tab-content-product-manufacture" id="@item.ManufactureID">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    }
+                    <!-- popular-product end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
+    <!-- PRODUCT TAB SECTION END -->
+    <!-- BLOG SECTION START -->
+    <div class="blog-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">Latest blog</h2>
+                        <h6>There are many variations of passages of brands available,</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="blog">
+                <div class="row active-blog">
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/Client/img/blog/1.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">dummy Blog name</a></h5>
+                                <p>There are many variations of passages of psum available, but the majority have suffered alterat on in some form, by injected humour, randomis words which don't look even slightly.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read more</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/Client/img/blog/2.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">dummy Blog name</a></h5>
+                                <p>There are many variations of passages of psum available, but the majority have suffered alterat on in some form, by injected humour, randomis words which don't look even slightly.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read more</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/Client/img/blog/3.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">dummy Blog name</a></h5>
+                                <p>There are many variations of passages of psum available, but the majority have suffered alterat on in some form, by injected humour, randomis words which don't look even slightly.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read more</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/Client/img/blog/1.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">dummy Blog name</a></h5>
+                                <p>There are many variations of passages of psum available, but the majority have suffered alterat on in some form, by injected humour, randomis words which don't look even slightly.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read more</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BLOG SECTION END -->
+</section>
+
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=392263297579443";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+@section ClientJS{
+<script src="~/Assets/Client/js/Controller/shoppingCart.js"></script>
+}

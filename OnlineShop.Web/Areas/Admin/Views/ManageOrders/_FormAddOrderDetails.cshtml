@@ -1,0 +1,40 @@
+﻿@model OnlineShop.Web.Models.Order_OrderDetailViewModel
+<div id="modalAdd" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmSaveDataCreate">
+                    <div class="form-group ui-widget">
+                        <label for="txtProductID">Product Name:</label>
+                        <input type="text" class="form-control" name="txtProductID" id="txtProductID" />
+                        <input type="hidden" id="oID" value=@Model.Orders.ID />
+                        <input type="hidden" id="idProduct" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSaleNumber2">Sale Number:</label>
+                        <input type="number" class="form-control" name="txtSaleNumber2" id="txtSaleNumber2" />
+                        <input type="hidden" id="hidID2" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSalePrice2">Sale Price:</label>
+                        <input type="number" class="form-control" readonly name="txtSalePrice2" id="txtSalePrice2" />
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="txtProductSpec2">Product Spec:</label>
+                        <input type="text" class="form-control" name="txtProductSpec2" id="txtProductSpec2" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btnSaveCreate">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

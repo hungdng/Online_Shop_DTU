@@ -1,0 +1,275 @@
+﻿@model OnlineShop.Web.Infrastructure.Core.PaginationSet<OnlineShop.Web.Models.ProductViewModel>
+@{
+    var keyword = (string)ViewBag.Keyword;
+    ViewBag.Title = "Search results for keyword " + keyword;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMBS SETCTION START -->
+<div class="breadcrumbs-section plr-200 mb-80">
+    <div class="breadcrumbs overlay-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumbs-inner">
+                        <h1 class="breadcrumbs-title">Search results @keyword</h1>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMBS SETCTION END -->
+
+<!-- Start page content -->
+<div id="page-content" class="page-wrapper">
+    <!-- SHOP SECTION START -->
+    <div class="shop-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="shop-content">
+                        <!-- shop-option start -->
+                        <div class="shop-option box-shadow mb-30 clearfix">
+                            <!-- Nav tabs -->
+                            <ul class="shop-tab f-left" role="tablist">
+                                <li class="active">
+                                    <a href="#grid-view" data-toggle="tab"><i class="zmdi zmdi-view-module"></i></a>
+                                </li>
+                            </ul>
+                            <!-- short-by -->
+                            @*<div class="short-by f-left text-center">
+                                <span>Sort by :</span>
+                                <select onchange="location = this.value;">
+                                    <option value="?page=@Model.Page&sort=popular">Phổ biến </option>
+                                    <option value="?page=@Model.Page&sort=new">Mới</option>
+                                    <option value="?page=@Model.Page&sort=discount">Khuyến mãi</option>
+                                    <option value="?page=@Model.Page&sort=price">Giá: Thấp -> Cao</option>
+                                </select>
+                            </div>*@
+                            <!-- showing -->
+                            @*<div class="showing f-right text-right">
+                                    <span>Showing : 01-09 of 17.</span>
+                                </div>*@
+                        </div>
+                        <!-- shop-option end -->
+                        <!-- Tab Content start -->
+                        <div class="tab-content">
+                            <!-- grid-view -->
+                            <div role="tabpanel" class="tab-pane active" id="grid-view">
+                                @if (Model.Count > 0)
+                                {
+                                    <div class="row">
+                                        @foreach (var item in Model.Items)
+                                        {
+                                            var url = "/" + item.Alias + ".p-" + item.ProductID + ".html";
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                                <div class="product-item">
+                                                    <div class="product-img">
+                                                        <a href="@url">
+                                                            <img src="@item.ThumbnailImage" alt="@item.ProductName">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-info">
+                                                        <h6 class="product-title">
+                                                            <a href="@url">@item.ProductName</a>
+                                                        </h6>
+                                                        <div class="pro-rating">
+                                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                            <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                                            <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                                        </div>
+                                                        @if (item.PromotionPrice > 0)
+                                                        {
+                                                            <h3 style="margin-bottom:5px;" class="pro-price">@item.PromotionPrice.Value.ToString("N0")</h3>
+                                                            <h4 style=" text-decoration: line-through; margin-bottom: 10px;" class="pro-price">@item.Price.ToString("N0")</h4>
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.Price > 0)
+                                                            {
+                                                                <h3 style="margin-bottom:5px;" class="pro-price">@item.Price.ToString("N0")</h3>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h3 style="margin-bottom:5px;" class="pro-price">Liên hệ</h3>
+                                                            }
+                                                            <h4 style="margin-bottom: 10px;" class="pro-price">&nbsp;</h4>
+                                                        }
+
+
+                                                        <ul class="action-button">
+                                                            <li>
+                                                                <a href="#" title="Favorite"><i class="zmdi zmdi-favorite"></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="" data-id="@item.ProductID" title="Quick View" class="btn-quickView"><i class="zmdi zmdi-zoom-in"></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                                            </li>
+                                                            <li>
+                                                                @if (item.Price > 0)
+                                                                {
+                                                                    <a href="" class="btn-AddToCart" data-id="@item.ProductID" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="" class="btn-contact" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                                }
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="text-center col-xs-12">No data found</div>
+                                }
+
+                            </div>
+                        </div>
+                        <!-- Tab Content end -->
+
+                        @if (Model.TotalPages > 1)
+                        {
+                            // Create numeric links
+                            var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
+                            var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+                            <!-- shop-pagination start -->
+                            <ul class="shop-pagination box-shadow text-center ptblr-10-30">
+                                @if (Model.Page > 1)
+                                {
+                                    <li>
+                                        <a href="?page=1">
+                                            <i class="zmdi zmdi-chevron-left"></i><i class="zmdi zmdi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="?page=@(Model.Page-1)"><i class="zmdi zmdi-chevron-left"></i></a>
+                                    </li>
+                                }
+
+                                @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                {
+                                    if (Model.Page == i)
+                                    {
+                                        <li class="active"><a href="?page=@i" title="Page @i">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="?page=@i" title="Page @i">@i</a></li>
+                                    }
+                                }
+
+                                @if (Model.Page < Model.TotalPages)
+                                {
+                                    <li>
+                                        <a href="?page=@(Model.Page+1)"><i class="zmdi zmdi-chevron-right"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="?page=@Model.TotalPages"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a>
+                                    </li>
+                                }
+                            </ul>
+                            <!-- shop-pagination end -->
+                        }
+
+                    </div>
+                </div>
+                @*<div class="col-md-3 col-md-pull-9 col-sm-12">
+                    
+                    <aside class="widget widget-categories box-shadow mb-30">
+                        <h6 class="widget-title border-left mb-20">Categories</h6>
+                        <div id="cat-treeview" class="product-cat">
+                            <ul>
+                                <li class="closed">
+                                    <a href="#">Brand One</a>
+                                    <ul>
+                                        <li><a href="#">Mobile</a></li>
+                                        <li><a href="#">Tab</a></li>
+                                        <li><a href="#">Watch</a></li>
+                                        <li><a href="#">Head Phone</a></li>
+                                        <li><a href="#">Memory</a></li>
+                                    </ul>
+                                </li>
+                                <li class="open">
+                                    <a href="#">Brand Two</a>
+                                    <ul>
+                                        <li><a href="#">Mobile</a></li>
+                                        <li><a href="#">Tab</a></li>
+                                        <li><a href="#">Watch</a></li>
+                                        <li><a href="#">Head Phone</a></li>
+                                        <li><a href="#">Memory</a></li>
+                                    </ul>
+                                </li>
+                                <li class="closed">
+                                    <a href="#">Accessories</a>
+                                    <ul>
+                                        <li><a href="#">Footwear</a></li>
+                                        <li><a href="#">Sunglasses</a></li>
+                                        <li><a href="#">Watches</a></li>
+                                        <li><a href="#">Utilities</a></li>
+                                    </ul>
+                                </li>
+                                <li class="closed">
+                                    <a href="#">Top Brands</a>
+                                    <ul>
+                                        <li><a href="#">Mobile</a></li>
+                                        <li><a href="#">Tab</a></li>
+                                        <li><a href="#">Watch</a></li>
+                                        <li><a href="#">Head Phone</a></li>
+                                        <li><a href="#">Memory</a></li>
+                                    </ul>
+                                </li>
+                                <li class="closed">
+                                    <a href="#">Jewelry</a>
+                                    <ul>
+                                        <li><a href="#">Footwear</a></li>
+                                        <li><a href="#">Sunglasses</a></li>
+                                        <li><a href="#">Watches</a></li>
+                                        <li><a href="#">Utilities</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                    <!-- shop-filter -->
+                    <aside class="widget shop-filter box-shadow mb-30">
+                        <h6 class="widget-title border-left mb-20">Price</h6>
+                        <div class="price_filter">
+                            <div class="price_slider_amount">
+                                <input type="submit" value="You range :" />
+                                <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                            </div>
+                            <div id="slider-range"></div>
+                        </div>
+                    </aside>
+
+                    <!-- operating-system -->
+                    <aside class="widget operating-system box-shadow mb-30">
+                        <h6 class="widget-title border-left mb-20">operating system</h6>
+                        <form action="action_page.php">
+                            <label><input type="checkbox" name="operating-1" value="phone-1">Windows Phone</label><br>
+                            <label><input type="checkbox" name="operating-1" value="phone-1">Bleckgerry ios</label><br>
+                            <label><input type="checkbox" name="operating-1" value="phone-1">Android</label><br>
+                            <label><input type="checkbox" name="operating-1" value="phone-1">ios</label><br>
+                            <label><input type="checkbox" name="operating-1" value="phone-1">Windows Phone</label><br>
+                            <label><input type="checkbox" name="operating-1" value="phone-1">Symban</label><br>
+                            <label class="mb-0"><input type="checkbox" name="operating-1" value="phone-1">Bleckgerry os</label><br>
+                        </form>
+                    </aside>
+                    <!-- widget-product -->
+
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <!-- SHOP SECTION END -->
+</div>
+<!-- End page content -->

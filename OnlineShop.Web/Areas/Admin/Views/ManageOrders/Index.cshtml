@@ -1,0 +1,149 @@
+﻿@model OnlineShop.Web.Infrastructure.Core.PaginationSet<OnlineShop.Web.Models.OrderViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Orders</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                List
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-xs-12 form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            @using (Html.BeginForm("Index", "ManageOrders", FormMethod.Get))
+                            {
+                                <div class="form-inline">
+                                    <input type="text" id="filter" value="@ViewBag.Filter" name="keyword" class="form-control " placeholder="Please enter bill code, customer name or order status..." />
+                                    <input type="submit" class="btn btn-primary" value="Search" />
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> @Html.ActionLink("Create", "Create", new { controller = "ManageOrders" }, new { @class = "btn-add" })</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 form-group">
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Bill Code</th>
+                                        <th>Status</th>
+                                        <th>Customer Name</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Payment Method</th>
+                                        <th>Total</th>
+                                        <th style="width:15%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model.Items)
+                                    {
+                                        <tr>
+                                            @if (@order.OrderStatusID == "COMPLETE")
+                                            {
+                                                <td>@order.BillCode</td>
+                                            }
+                                            else
+                                            {
+                                                <td><a href="/Admin/ManageOrders/Edit/@order.ID">@order.BillCode</a></td>
+                                            }
+                                            <td>@order.OrderStatusID</td>
+                                            <td>@order.CustomerName</td>
+                                            <td>@order.CustomerAddress</td>
+                                            <td>@order.CustomerMobile</td>
+                                            <td>@order.CustomerEmail</td>
+                                            <td>@order.PaymentMethod</td>
+                                            <td>@order.TotalCost.ToString("N0")</td>
+                                            @if (@order.OrderStatusID != "COMPLETE")
+                                            {
+                                                <td>
+                                                    <a href="/Admin/ManageOrders/Edit/@order.ID" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @if (Model.TotalPages > 1)
+                            {
+                                // Create numeric links
+                                var startpage = Math.Max(1, Model.Page - Model.MaxPage / 2);
+                                var endpage = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+
+                                <nav class="text-center">
+                                    <ul class="pagination">
+                                        @if (Model.Page > 1)
+                {
+                                            <li>
+                                                <a href="?page=1" data-toggle="tooltip" title="First" aria-label="First">
+                                                    <i class="fa fa-angle-double-left"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="?page=@(Model.Page-1)" data-toggle="tooltip" title="Previous" aria-label="Previous">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </a>
+                                            </li>
+                                        }
+                                        @for (int i = startpage; i <= endpage; i++)
+                {
+                    if (Model.Page == i)
+                    {
+                                                <li class="active"><a href="?page=@i" data-toggle="tooltip" title="Page @i">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="?page=@i" data-toggle="tooltip" title="Page @i">@i</a></li>
+                                            }
+                                        }
+                                        @if (Model.Page < Model.TotalPages)
+                {
+                                            <li>
+                                                <a href="?page=@(Model.Page+1)" data-toggle="tooltip" title="Next" aria-label="Next">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="?page=@Model.TotalPages" data-toggle="tooltip" title="Last" aria-label="Last">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </nav>
+                            }
+                        </div>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+</div>
